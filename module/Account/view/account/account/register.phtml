@@ -1,0 +1,26 @@
+<?php $form->setAttribute('action',$this->url('register')); ?>
+
+<?php echo $this->form()->openTag($form); ?>
+
+<?php echo $this->translate('Username') ?>
+<?php echo $this->formText($form->get('identity')) ?>
+<?php echo $this->formElementErrors($form->get('identity')); ?><br>
+
+<?php echo $this->translate('Email') ?>
+<?php echo $this->formEmail($form->get('email')) ?>
+<?php echo $this->formElementErrors($form->get('email')); ?> <br>
+
+<?php echo $this->translate('Password') ?>
+<?php echo $this->formText($form->get('credential')) ?>
+<?php echo $this->formElementErrors($form->get('credential')); ?> <br>
+
+<?php echo $this->translate('Confirm Password') ?>
+<?php echo $this->formText($form->get('credential_confirm')) ?>
+<?php echo $this->formElementErrors($form->get('credential_confirm')); ?> <br>
+
+<?php echo $this->FormCaptcha($form->get('captcha')) ?>
+<?php echo $this->formElementErrors($form->get('captcha')); ?> <br>
+
+<?php echo $this->FormSubmit($form->get('submit')->setAttribute('value',$this->translate('Register'))) ?>
+
+<?php echo $this->form()->closeTag($form); ?>

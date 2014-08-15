@@ -1,0 +1,13 @@
+<p>
+<?php
+if ($actived){
+	
+	echo sprintf($this->translate('Your account " %s " has actived !'),$email);
+	
+}else{
+	
+	echo sprintf($this->translate('Are you kidding me ? " %s " is not an available account.'),$email);
+	
+}
+?>
+</p>
