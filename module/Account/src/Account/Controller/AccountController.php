@@ -21,9 +21,7 @@ class AccountController extends AbstractActionController
 
     public function registerAction()
     {
-		$adapter = $this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
-		
-		$form = new Form\RegisterForm($adapter);
+		$form = new Form\RegisterForm('/register/captcha');
 		$account = new Model\Account();
 		$form->bind($account);
 		
@@ -101,6 +99,39 @@ class AccountController extends AbstractActionController
 		                 'actived'=>$actived,
 						 ));
 		
+	}
+	
+	public function captchaAction(){
+		
+        $response = $this->getResponse();
+        $id = $this->params('fileid',false);
+		
+ 
+        if ($id) {
+ 
+            $image = './data/captcha/images/' . $id;
+
+            if (file_exists($image) !== false) {
+				
+                $imagegetcontent = @file_get_contents($image);
+				$response->getHeaders()->addHeaderLine('Content-Type', "image/png");
+                $response->setStatusCode(200);
+                $response->setContent($imagegetcontent);
+ 
+                if (file_exists($image) == true) {
+                    unlink($image);
+                }
+				
+            }else{
+				return new ViewModel(array('id'=>$id));
+			}
+ 
+        }else{
+				return new ViewModel(array('id'=>$id));
+			}
+ 
+        return $response;
+
 	}
 
 	protected function getAccountTable()
