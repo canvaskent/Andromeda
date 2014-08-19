@@ -9,7 +9,7 @@ use Zend\Captcha\Image as CaptchaImage;
 
 class RegisterForm extends Form
 {
-   public function __construct($urlcaptcha)
+   public function __construct( $dbAdapter )
    {
 
 	   parent::__construct('register');
@@ -46,7 +46,7 @@ class RegisterForm extends Form
 				)
         );
         $captchaImage->setImgDir('./data/captcha/images');
-        $captchaImage->setImgUrl($urlcaptcha);
+        $captchaImage->setImgUrl('/session/captcha');
 
 	  $this->add(array(
 		  'type' => 'Captcha',
@@ -93,6 +93,14 @@ class RegisterForm extends Form
 					   'pattern' => '/^[a-z]+[0-9a-z]*$/u',
                     ),
 			   ),
+			   array(
+				   'name'    => 'Db\NoRecordExists',
+				   'options' => array(
+						'table'   => 'account',
+						'field'   => 'identity',
+						'adapter' => $dbAdapter
+                    ),
+			   ),
 		   ),
 	   ));
 
@@ -101,6 +109,14 @@ class RegisterForm extends Form
 		   'required' => true,
 		   'validators'  => array(
 			   array('name' => 'EmailAddress'),
+			   array(
+				   'name'    => 'Db\NoRecordExists',
+				   'options' => array(
+						'table'   => 'account',
+						'field'   => 'email',
+						'adapter' => $dbAdapter
+                    ),
+			   ),
 		   ),
 	   ));
 
