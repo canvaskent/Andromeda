@@ -42,7 +42,8 @@ class RegisterForm extends Form
                 'height' => 40,
 				'fontSize' => 15,
                 'dotNoiseLevel' => 3,
-                'lineNoiseLevel' => 1
+                'lineNoiseLevel' => 1,
+				'wordLen' => 4,
 				)
         );
         $captchaImage->setImgDir('./data/captcha/images');

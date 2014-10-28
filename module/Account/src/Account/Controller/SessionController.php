@@ -55,7 +55,8 @@ class SessionController extends AbstractActionController
 					  ->setTableName('account')
 					  ->setIdentityColumn('email')
 					  ->setCredentialColumn('credential_treatment')
-					  ->setCredentialTreatment('MD5(?)');
+					  ->setCredentialTreatment('MD5(?)')
+					  ->getDbSelect()->where('status=1');
 	
 				   $authAdapter
 					  ->setIdentity($data['email'])

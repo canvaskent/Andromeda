@@ -1,0 +1,28 @@
+<?php if ($form): ?>
+
+<?php $form->setAttribute('action',$this->url('profile')); ?>
+
+<?php echo $this->form()->openTag($form); ?>
+
+<?php echo $this->translate('Nickname') ?>
+<?php echo $this->formText($form->get('nickname')) ?>
+<?php echo $this->formElementErrors($form->get('nickname')); ?><br>
+
+<?php echo $this->translate('Sex') ?>
+<?php $options = $form->get('sex')->getOptions();
+      $options['value_options'][0] = 'Girl';
+	  $options['value_options'][1] = 'Boy';
+	  $form->get('sex')->setOptions($options);
+      echo $this->formSelect($form->get('sex'));
+      echo $this->formElementErrors($form->get('sex')); ?> <br>
+
+
+<?php echo $this->FormSubmit($form->get('submit')->setAttribute('value',$this->translate('Modify'))) ?>
+
+<?php echo $this->form()->closeTag($form); ?>
+
+<?php else: ?>
+
+&nbsp;<?php echo sprintf($this->translate('Who are you ? <a href="%s" title="Login Now !">Login Now !</a>'),$this->url('session')); ?>
+
+<?php endif ?>
